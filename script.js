@@ -71,7 +71,7 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
      //Sets axis
      let xScale = d3.scaleTime()
                     .domain([minDate, maxDate])
-                    .range([0, width- 300])
+                    .range([0, width - 400])
   
      let yScale = d3.scaleLinear()
                     .domain([0, gdpMax])
@@ -146,3 +146,4 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
                    .style('opacity', 0);
         })
   })
+
