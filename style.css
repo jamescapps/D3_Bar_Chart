@@ -1,0 +1,43 @@
+html {
+    background-color: black;
+  }
+  
+  .project {
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #title {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+  
+  .axisWhite line {
+    stroke: white;
+  }
+  
+  .axisWhite path{
+    stroke: white;
+  }
+  
+  .axisWhite text{
+    fill: white;
+  }
+  
+  #tooltip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    text-align: center;
+    width: 150px;
+    height: 100px;
+    background: black;
+    pointer-events: none;
+  }
+  
+  
