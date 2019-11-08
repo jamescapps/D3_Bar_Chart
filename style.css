@@ -6,7 +6,7 @@ html {
     color: white;
     height: 100vh;
     width: 100vw;
-    display: flex;
+   
     align-items: center;
     justify-content: center;
   }
@@ -39,5 +39,4 @@ html {
     background: black;
     pointer-events: none;
   }
-  
   

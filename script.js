@@ -61,6 +61,7 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
                    .append('svg')
                    .attr('width', width + 200)
                    .attr('height', height + 60)
+                   
       //Y-axis text
       svg.append('text')
          .attr('transform', 'rotate(-90)')
@@ -95,7 +96,7 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
         .attr('id', 'y-axis')
         .attr('transform', 'translate(290, 40)')
         .attr("class", "axisWhite")
-  
+
      //Creates bars
      svg.selectAll("rect")
         .data(scaledGDP)
@@ -144,6 +145,6 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
             overlay.transition()
                    .duration(200)
                    .style('opacity', 0);
-        })
-  })
+        })  
+})
 
