@@ -61,19 +61,20 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
                    .append('svg')
                    .attr('width', width + 200)
                    .attr('height', height + 60)
-                   
+                   .call(responsivefy)
+      
       //Y-axis text
       svg.append('text')
          .attr('transform', 'rotate(-90)')
          .attr('x', -300)
          .attr('y', 200)
-         .text('Gross Domestic Product (Billions)')
+         .attr("id", "sidetext")
+         .text('Billions')
 
      //Sets axis
      let xScale = d3.scaleTime()
                     .domain([minDate, maxDate])
                     .range([0, width - 400])
-  
      let yScale = d3.scaleLinear()
                     .domain([0, gdpMax])
                     .range([height, 0])
@@ -90,7 +91,7 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
         .attr('id', 'x-axis')
         .attr('transform', 'translate(290, 440)')
         .attr("class", "axisWhite")
-  
+
      svg.append("g")
         .call(yAxis)
         .attr('id', 'y-axis')
@@ -145,6 +146,30 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
             overlay.transition()
                    .duration(200)
                    .style('opacity', 0);
-        })  
-})
+        })
+  
+  /* The below function makes the graph responsive.  It was taken from Ben Clinkinbeard's website and was  originally written by Brendan Sudol. https://benclinkinbeard.com/d3tips/make-any-chart-responsive-with-one-function/?utm_content=buffer976d6&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer */
+  
+    function responsivefy(svg) {
+    const container = d3.select(svg.node().parentNode),
+        width = parseInt(svg.style('width'), 10),
+        height = parseInt(svg.style('height'), 10),
+        aspect = width / height
 
+    svg.attr('viewBox', `0 0 ${width} ${height}`)
+        .attr('preserveAspectRatio', 'xMinYMid')
+        .call(resize);
+
+    d3.select(window).on(
+        'resize.' + container.attr('id'), 
+        resize
+    );
+    
+    function resize() {
+        const w = parseInt(container.style('width'));
+        svg.attr('width', w);
+        svg.attr('height', Math.round(w / aspect));
+    }
+  }
+})
+  
