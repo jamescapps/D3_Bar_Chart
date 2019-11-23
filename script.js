@@ -1,5 +1,5 @@
 //Receives the data to be used.
-fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json')
+fetch("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json")
   .then(response => response.json())
   .then(data => {
       const dataSet = data.data 
@@ -15,14 +15,14 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
         let quarter
         let numberMonth = item[0].substring(5,7)
         
-        if (numberMonth === '01') {
-          quarter = '1st Quarter'
-        } else if (numberMonth === '04') {
-          quarter = '2nd Quarter'
-        } else if (numberMonth === '07') {
-          quarter = '3rd Quarter'
-        } else if (numberMonth === '10') {
-          quarter = '4th Quarter'
+        if (numberMonth === "01") {
+          quarter = "1st Quarter"
+        } else if (numberMonth === "04") {
+          quarter = "2nd Quarter"
+        } else if (numberMonth === "07") {
+          quarter = "3rd Quarter"
+        } else if (numberMonth === "10") {
+          quarter = "4th Quarter"
         }
         
         return quarter + ' ' + item[0].substring(0, 4)
@@ -54,22 +54,22 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
                       .append("div")
                       .attr("id", "tooltip")
       
-      let overlay = d3.select('.chart').append('div')
-                      .attr('class', 'overlay')
+      let overlay = d3.select(".chart").append("div")
+                      .attr("class", "overlay")
                       
-      let svg =  d3.select('#chart')
-                   .append('svg')
-                   .attr('width', width + 200)
-                   .attr('height', height + 60)
+      let svg =  d3.select("#chart")
+                   .append("svg")
+                   .attr("width", width + 200)
+                   .attr("height", height + 60)
                    .call(responsivefy)
       
       //Y-axis text
-      svg.append('text')
-         .attr('transform', 'rotate(-90)')
-         .attr('x', -300)
-         .attr('y', 200)
+      svg.append("text")
+         .attr("transform", "rotate(-90)")
+         .attr("x", -300)
+         .attr("y", 200)
          .attr("id", "sidetext")
-         .text('Billions')
+         .text("Billions")
 
      //Sets axis
      let xScale = d3.scaleTime()
@@ -88,14 +88,14 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
   
      svg.append("g")
         .call(xAxis)
-        .attr('id', 'x-axis')
-        .attr('transform', 'translate(290, 440)')
+        .attr("id", "x-axis")
+        .attr("transform", "translate(290, 440)")
         .attr("class", "axisWhite")
 
      svg.append("g")
         .call(yAxis)
-        .attr('id', 'y-axis')
-        .attr('transform', 'translate(290, 40)')
+        .attr("id", "y-axis")
+        .attr("transform", "translate(290, 40)")
         .attr("class", "axisWhite")
 
      //Creates bars
@@ -103,73 +103,72 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
         .data(scaledGDP)
         .enter()
         .append("rect")
-        .style('fill', 'green')
-        .attr('data-date', function(d, i) {
+        .style("fill", "green")
+        .attr("data-date", function(d, i) {
            return data.data[i][0]
         })
-        .attr('data-gdp', function(d, i) {
+        .attr("data-gdp", function(d, i) {
            return data.data[i][1]
         })
-        .attr('class', 'bar')
-        .attr('x', function(d, i) {
+        .attr("class", "bar")
+        .attr("x", function(d, i) {
            return xScale(years[i])
         })
-        .attr('y', function(d, i) {
+        .attr("y", function(d, i) {
            return height - d
         })
-        .attr('width', barWidth)
-        .attr('height', function(d) {
+        .attr("width", barWidth)
+        .attr("height", function(d) {
             return d
         })
-        .attr('transform', 'translate(290, 40)')
+        .attr("transform", "translate(290, 40)")
   
         //Highlighted information
-        .on('mouseover', function(d, i) {
+        .on("mouseover", function(d, i) {
           d3.select(this)
             .style("fill", "white")
           overlay.transition()
                  .duration(0)
           tooltip.transition()
                  .duration(200)
-                 .style('opacity', .9)
-          tooltip.html(displayYears[i] + '<br>' + '$' + gdp[i].toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' Billion')
-                 .attr('data-date', data.data[i][0])
+                 .style("opacity", .9)
+          tooltip.html(displayYears[i] + "<br>" + "$" + gdp[i].toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " Billion")
+                 .attr("data-date", data.data[i][0])
                  .style("left", (d3.event.pageX) + "px")
-                 .style("top", (d3.event.pageY) + "px");
+                 .style("top", (d3.event.pageY) + "px")
         })
-        .on('mouseout', function(d) {
+        .on("mouseout", function(d) {
             d3.select(this)
               .style("fill", "green")
             tooltip.transition()
                    .duration(200)
-                   .style('opacity', 0);
+                   .style("opacity", 0)
             overlay.transition()
                    .duration(200)
-                   .style('opacity', 0);
+                   .style("opacity", 0)
         })
-  
+   
   /* The below function makes the graph responsive.  It was taken from Ben Clinkinbeard's website and was  originally written by Brendan Sudol. https://benclinkinbeard.com/d3tips/make-any-chart-responsive-with-one-function/?utm_content=buffer976d6&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer */
   
-    function responsivefy(svg) {
+  function responsivefy(svg) {
     const container = d3.select(svg.node().parentNode),
-        width = parseInt(svg.style('width'), 10),
-        height = parseInt(svg.style('height'), 10),
+        width = parseInt(svg.style("width"), 10),
+        height = parseInt(svg.style("height"), 10),
         aspect = width / height
 
-    svg.attr('viewBox', `0 0 ${width} ${height}`)
-        .attr('preserveAspectRatio', 'xMinYMid')
+    svg.attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("preserveAspectRatio", "xMinYMid")
         .call(resize);
 
     d3.select(window).on(
-        'resize.' + container.attr('id'), 
+        "resize." + container.attr("id"), 
         resize
     );
     
     function resize() {
-        const w = parseInt(container.style('width'));
-        svg.attr('width', w);
-        svg.attr('height', Math.round(w / aspect));
+        const w = parseInt(container.style("width"));
+        svg.attr("width", w);
+        svg.attr("height", Math.round(w / aspect));
     }
   }
 })
-  
